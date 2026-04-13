@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public Animator WinScreen;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,8 +15,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void Won()
+    public void Won()
     {
+        WinScreen.SetTrigger("win");
         FindFirstObjectByType<LinesDrawer>().enabled = false;
 
     }

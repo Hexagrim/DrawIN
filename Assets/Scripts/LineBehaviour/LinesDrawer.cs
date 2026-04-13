@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public class LinesDrawer : MonoBehaviour {
 
@@ -12,6 +13,9 @@ public class LinesDrawer : MonoBehaviour {
 	Line currentLine;
 	Camera cam;
 	public LayerMask ground;
+
+	public int num_Shapes;
+	public TMP_Text Score;
 	void Start ( ) {
 		cam = Camera.main;
 		cantDrawOverLayerIndex = cantDrawOverLayer.value;
@@ -23,8 +27,11 @@ public class LinesDrawer : MonoBehaviour {
 			Draw ( );
 		if ( Input.GetMouseButtonUp ( 0 ) )
 			EndDraw ( );
+
+		Score.text = "Total Shapes: " + num_Shapes;
 	}
 	void BeginDraw ( ) {
+		num_Shapes++;
 		currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
 		currentLine.UsePhysics ( false );
 		currentLine.SetLineColor ( lineColor );
