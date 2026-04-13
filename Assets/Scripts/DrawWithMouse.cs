@@ -13,21 +13,28 @@ public class DrawWithMouse : MonoBehaviour
     List<Vector2> points = new List<Vector2>();
 
     public GameObject lineObj;
+
+    bool startedDrawing;
     void Start()
     {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         Line = GetComponent<LineRenderer>();
         Line.positionCount = 1;
         previousPos = transform.position;
-        Line.startWidth = Line.endWidth = 0.25f;
+        Line.startWidth = Line.endWidth = 0.5f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetMouseButton(0))
+
+        if (Input.GetMouseButtonDown(0) && CanDraw())
         {
+            startedDrawing = true;
+        }
+
+        if (Input.GetMouseButton(0) && startedDrawing && CanDraw())
+        {
+
             Vector3 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentPos.z = 0f;
             points.Add(currentPos);
@@ -52,16 +59,24 @@ public class DrawWithMouse : MonoBehaviour
             coll.points = points.ToArray();
 
         }
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && startedDrawing)
         {
             GameObject obj = Instantiate(lineObj , transform.position, Quaternion.identity);
             obj.GetComponent<LineRenderer>().SetPositions(new Vector3[0]);
             obj.GetComponent<EdgeCollider2D>().points = new Vector2[0];
-            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
             Destroy(this);
 
         }
 
 
+    }
+    bool CanDraw()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        LayerMask ignoreDrawMask = LayerMask.GetMask("IgnoreDraw");
+
+        Collider2D hit = Physics2D.OverlapPoint(mousePos, ignoreDrawMask);
+
+        return hit == null;
     }
 }
