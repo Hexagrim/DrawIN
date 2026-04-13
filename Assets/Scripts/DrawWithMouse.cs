@@ -38,7 +38,6 @@ public class DrawWithMouse : MonoBehaviour
             Vector3 currentPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             currentPos.z = 0f;
             points.Add(currentPos);
-
             if(Vector3.Distance(currentPos, previousPos) > minDistance)
             {
                 if(previousPos == transform.position)
