@@ -5,8 +5,13 @@ using UnityEngine.Rendering;
 public class LevelEditor : MonoBehaviour
 {
     public GameObject selectedObj;
-
     public TMP_InputField inputScaleX, inputScaleY, inputRotation;
+    public GameObject EditorPanel;
+
+    public GameObject ground, bounce, noDraw;
+
+    public Transform LevelEditorObjPOS;
+
     void Start()
     {
 
@@ -15,25 +20,36 @@ public class LevelEditor : MonoBehaviour
 
     void Update()
     {
+        if(selectedObj != null && !selectedObj.CompareTag("Main"))
+        {
+            EditorPanel.SetActive(true);
+        }
+        else
+        {
+            EditorPanel.SetActive(false);
+        }
         if (Input.GetMouseButtonDown(0))
         {
-            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            
+                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
+                RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
 
-            if (hit.collider && hit.collider.gameObject.GetComponent<EditObject>())
-            {
-                selectedObj = hit.collider.gameObject;
-                SetInputFeild();
-                Debug.Log("Hit object: " + hit.collider.name);
-                selectedObj.GetComponent<EditObject>().StartMoveToMouse();
-            }
+                if (hit.collider && hit.collider.gameObject.GetComponent<EditObject>())
+                {
+                    selectedObj = hit.collider.gameObject;
+                    SetInputFeild();
+                    Debug.Log("Hit object: " + hit.collider.name);
+                    selectedObj.GetComponent<EditObject>().StartMoveToMouse();
+                }
+            
         }
         if (Input.GetMouseButtonUp(0))
         {
             if (selectedObj != null)
                 selectedObj.GetComponent<EditObject>().StopMoveToMouse();
         }
+
     }
 
     public void ChangeScaleX()
@@ -81,6 +97,7 @@ public class LevelEditor : MonoBehaviour
     {
         if (selectedObj == null) return;
         float v;
+
         if (inputRotation.text != "")
         {
 
@@ -90,6 +107,11 @@ public class LevelEditor : MonoBehaviour
         {
             v = 0f;
         }
+
+        if (v < 0f)
+        {
+            return;
+        }
         selectedObj.transform.rotation = Quaternion.Euler(0, 0, v);
     }
 
@@ -97,10 +119,21 @@ public class LevelEditor : MonoBehaviour
     {
         if (selectedObj == null) return;
         Transform t = selectedObj.transform;
-        inputScaleX.text = selectedObj.transform.localScale.x.ToString();
-        inputScaleY.text = selectedObj.transform.localScale.y.ToString();
-        inputRotation.text = selectedObj.transform.rotation.z.ToString();
+        inputScaleX.text = t.localScale.x.ToString();
+        inputScaleY.text = t.localScale.y.ToString();
+        inputRotation.text = t.rotation.eulerAngles.z.ToString();
     }
     
-
+    public void CreateBounce()
+    {
+        Instantiate(bounce, LevelEditorObjPOS);
+    }
+    public void CreateGround()
+    {
+        Instantiate(ground, LevelEditorObjPOS);
+    }
+    public void CreateNonDraw()
+    {
+        Instantiate(noDraw, LevelEditorObjPOS);
+    }
 }
