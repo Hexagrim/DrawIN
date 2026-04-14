@@ -13,18 +13,25 @@ public class LevelManager : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Retry();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            StartCoroutine(NextScene("MainMenu"));
+        }
     }
 
     public void NextLevel()
     {
-        StartCoroutine(NextScene());
+        StartCoroutine(NextScene(nextLevel));
     }
-    IEnumerator NextScene()
+    IEnumerator NextScene(string lvl)
     {
         T_Anim.SetTrigger("fade");
         yield return new WaitForSeconds(0.25f);
-        SceneManager.LoadSceneAsync(nextLevel);
+        SceneManager.LoadSceneAsync(lvl);
     }
     public void Retry()
     {

@@ -41,7 +41,7 @@ public class LinesDrawer : MonoBehaviour {
 	}
 	void Draw ( ) {
 		Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
-		RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 5f, Vector2.zero, 1f, cantDrawOverLayer );
+		RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
 
         bool hitGround = Physics2D.OverlapCircle(mousePosition, lineWidth / 5f,ground);
         
@@ -56,9 +56,8 @@ public class LinesDrawer : MonoBehaviour {
 				//if za line has one point we dont want it!
 				Destroy ( currentLine.gameObject );
 			} else {
-				currentLine.gameObject.layer = cantDrawOverLayer;
+				currentLine.gameObject.layer = cantDrawOverLayer.value;
 				currentLine.UsePhysics ( true );
-
 				currentLine = null;
 			}
 		}

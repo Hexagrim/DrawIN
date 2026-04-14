@@ -11,7 +11,6 @@ public class Line : MonoBehaviour {
 	[HideInInspector] public int pointsCount = 0;
 	float pointsMinDistance = 0.1f;
 	float circleColliderRadius;
-
 	public void AddPoint ( Vector2 newPoint ) {
 		if ( pointsCount >= 1 && Vector2.Distance ( newPoint, GetLastPoint ( ) ) < pointsMinDistance )
 			return;
