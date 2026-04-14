@@ -7,7 +7,7 @@ public class MainMenuScript : MonoBehaviour
     public Animator T_Anim;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,5 +29,10 @@ public class MainMenuScript : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void MakeLevels()
+    {
+
     }
 }

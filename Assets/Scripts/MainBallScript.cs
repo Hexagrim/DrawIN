@@ -22,6 +22,19 @@ public class MainBallScript : MonoBehaviour
     {
         win = false;
         rb = GetComponent<Rigidbody2D>();
+
+        if(ScoreText == null)
+        {
+            ScoreText = GameObject.FindWithTag("countdown").GetComponent<Animator>();
+        }
+        if(LiveTimerText == null)
+        {
+            LiveTimerText = GameObject.FindWithTag("timer").GetComponent<TMP_Text>();
+        }
+        if(TimerText == null)
+        {
+            TimerText = GameObject.FindWithTag("levelwin").GetComponent<TMP_Text>();
+        }
     }
 
     void Update()

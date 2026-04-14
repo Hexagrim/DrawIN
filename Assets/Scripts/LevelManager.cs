@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,9 +7,15 @@ public class LevelManager : MonoBehaviour
 {
     public Animator T_Anim;
     public string nextLevel;
+    public TMP_Text nextlvlText;
     void Start()
     {
-
+        if(SceneManager.GetActiveScene().name == "LoadedLevel")
+        {
+            nextLevel = "MainMenu";
+            nextlvlText.text = "Main Menu";
+            
+        }
     }
 
     void Update()

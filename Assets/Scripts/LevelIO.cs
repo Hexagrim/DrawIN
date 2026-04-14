@@ -2,6 +2,7 @@ using SFB;
 using System.ComponentModel;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelIO : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class LevelIO : MonoBehaviour
     // =========================
     // EXPORT LEVEL
     // =========================
+
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "LoadedLevel")
+        {
+            RebuildLevel(GameData.loadedLevel);
+        }
+    }
     public void ExportLevel()
     {
         LevelData level = BuildLevelData();
@@ -36,9 +45,9 @@ public class LevelIO : MonoBehaviour
         Debug.Log("Level exported: " + path);
     }
 
-    // =========================
+    // 
     // IMPORT LEVEL
-    // =========================
+    // 
     public void ImportLevel()
     {
         var paths = StandaloneFileBrowser.OpenFilePanel(
@@ -54,14 +63,12 @@ public class LevelIO : MonoBehaviour
         string json = File.ReadAllText(paths[0]);
 
         LevelData data = JsonUtility.FromJson<LevelData>(json);
-        RebuildLevel(data);
+        //RebuildLevel(data);
+        GameData.loadedLevel = data;
 
         Debug.Log("Level loaded!");
     }
 
-    // =========================
-    // BUILD LEVEL DATA
-    // =========================
     public LevelData BuildLevelData()
     {
         EditObject[] objects = FindObjectsByType<EditObject>(FindObjectsSortMode.None);
@@ -84,9 +91,6 @@ public class LevelIO : MonoBehaviour
         return level;
     }
 
-    // =========================
-    // REBUILD LEVEL
-    // =========================
     void RebuildLevel(LevelData data)
     {
         foreach (var obj in data.objects)
@@ -105,6 +109,7 @@ public class LevelIO : MonoBehaviour
             instance.transform.eulerAngles = obj.rotation;
             instance.transform.localScale = obj.scale;
         }
+        //GameData.loadedLevel = null;
     }
     GameObject GetPrefab(string id)
     {
@@ -113,8 +118,8 @@ public class LevelIO : MonoBehaviour
             case "ground": return ground;
             case "bounce": return bounce;
             case "noDraw": return noDraw;
-            case "ball": return bounce;
-            case "box": return noDraw;
+            case "ball": return ball;
+            case "box": return box;
         }
 
         return null;
