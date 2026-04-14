@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7882224460170766628}
   - component: {fileID: 7003934393095876849}
   - component: {fileID: 3261057590013329564}
+  - component: {fileID: 3314396397298847853}
   m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 6235637445862681197}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.11, y: 21.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0.10882812}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 0.10882812}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -138,3 +139,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3314396397298847853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6235637445862681197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3582730a821ea149b318d7e5f25cbc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EditObject
+  id: ground

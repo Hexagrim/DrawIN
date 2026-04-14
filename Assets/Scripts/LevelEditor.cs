@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 
 public class LevelEditor : MonoBehaviour
@@ -30,8 +31,10 @@ public class LevelEditor : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            
-                Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
+            Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
 
@@ -135,5 +138,10 @@ public class LevelEditor : MonoBehaviour
     public void CreateNonDraw()
     {
         Instantiate(noDraw, LevelEditorObjPOS);
+    }
+    public void Delete()
+    {
+        if (selectedObj.CompareTag("ScoreBox")) return;
+        Destroy(selectedObj);
     }
 }

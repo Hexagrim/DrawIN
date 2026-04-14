@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5688690567022236784}
   - component: {fileID: 5262680946689134185}
   - component: {fileID: 8466432558281674502}
-  - component: {fileID: 1864866263533855184}
   m_Layer: 3
   m_Name: NoDraw
   m_TagString: Untagged
@@ -139,16 +138,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1864866263533855184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6258724628858231876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3582730a821ea149b318d7e5f25cbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EditObject
-  id: noDraw
