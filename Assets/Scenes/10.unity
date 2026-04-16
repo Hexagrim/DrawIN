@@ -1330,10 +1330,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.25885418
     y: 0
-    width: 0.99999994
-    height: 0.9995952
+    width: 0.28240743
+    height: 0.2824074
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 34
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   T_Anim: {fileID: 575267393}
-  nextLevel: SampleScene
+  nextLevel: 11
   nextlvlText: {fileID: 0}
 --- !u!4 &1722818149
 Transform:
